@@ -1,0 +1,82 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+
+# 1. Sphere Function 
+def sphere(x, y):
+    return x**2 + y**2
+
+x = np.linspace(-5, 5, 200)
+y = np.linspace(-5, 5, 200)
+X, Y = np.meshgrid(x, y)
+Z = sphere(X, Y)
+
+plt.contourf(X, Y, Z, levels=30, cmap='viridis')
+plt.colorbar(label='f(x, y)')
+plt.title('Sphere Function Landscape')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+
+
+# 2. Rastrigin Function
+def rastrigin(x, y):
+    A = 10
+    return 2*A + (x**2 - A*np.cos(2*np.pi*x)) \
+               + (y**2 - A*np.cos(2*np.pi*y))
+
+x = np.linspace(-5.12, 5.12, 200)
+y = np.linspace(-5.12, 5.12, 200)
+X, Y = np.meshgrid(x, y)
+Z = rastrigin(X, Y)
+
+plt.contourf(X, Y, Z, levels=30, cmap='viridis')
+plt.colorbar(label='f(x, y)')
+plt.title('Rastrigin Function Landscape')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+
+# 3. Ackley Function
+def ackley(x, y):
+    return (-20 * np.exp(-0.2 * np.sqrt(0.5 * (x**2 + y**2))) 
+            - np.exp(0.5 * (np.cos(2 * np.pi * x) + np.cos(2 * np.pi * y))) 
+            + np.e + 20)
+
+x = np.linspace(-5, 5, 200)
+y = np.linspace(-5, 5, 200)
+X, Y = np.meshgrid(x, y)
+Z = ackley(X, Y)
+
+plt.contourf(X, Y, Z, levels=30, cmap='viridis')
+plt.colorbar(label='f(x, y)')
+plt.title('Ackley Function Landscape')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+
+
+# 4. Random Search Optimization
+def random_search(func, bounds, iterations=1000):
+    best_point = None
+    best_score = float('inf')
+    for i in range(iterations):
+        x = random.uniform(bounds[0], bounds[1])
+        y = random.uniform(bounds[0], bounds[1])
+        score = func(x, y)
+        if score < best_score:
+            best_score = score
+            best_point = (x, y)
+    return best_point, best_score
+
+# Run search on Sphere
+best_point, best_score = random_search(sphere, (-5, 5))
+print('Sphere -> Best point:', best_point, 'Best score:', best_score)
+
+# Run search on Rastrigin
+best_point, best_score = random_search(rastrigin, (-5.12, 5.12))
+print('Rastrigin -> Best point:', best_point, 'Best score:', best_score)
+
+# Run search on Ackley
+best_point, best_score = random_search(ackley, (-5, 5))
+print('Ackley -> Best point:', best_point, 'Best score:', best_score)
