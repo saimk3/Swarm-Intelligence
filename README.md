@@ -82,7 +82,7 @@ flowchart TD
 
 ### Hand-Drawn Flow Diagram (Photographed)
 <div align="center">
-  <img src="assets/flowchart.jpg" alt="Hand-Drawn Flow Diagram" width="500" />
+  <img src="assets/flowchart.jpeg" alt="Hand-Drawn Flow Diagram" width="500" />
 </div>
 
 ---
