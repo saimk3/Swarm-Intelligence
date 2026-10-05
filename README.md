@@ -1,8 +1,7 @@
 # Swarm-Based 2D Path Planning with Obstacles using PSO
 
 **Course:** Swarm Intelligence (Semester 7) — Lab Assignment 1  
-**Department:** Department of Computer Science, Bahria University  
-**Instructor / Submission Email:** [ahsanjaved5000@gmail.com](mailto:ahsanjaved5000@gmail.com)  
+**Department:** BS-Artificial Intelligence - Department of Computer Science, Bahria University  
 
 ---
 
