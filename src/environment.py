@@ -19,7 +19,7 @@ class GridEnvironment:
     def __init__(
         self,
         grid_size: int = 20,
-        seed: int = 1136232073,
+        seed: int = 73,
         obstacle_ratio: float = 0.20,
     ):
         self.grid_size = grid_size

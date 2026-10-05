@@ -15,25 +15,25 @@ STUDENT_ROLL_NO: str = "01-136232-073"
 
 def roll_number_to_seed(roll_no: Union[str, int]) -> int:
     """
-    Deterministically transforms a student roll number into an integer random seed.
-    
-    If roll_no contains digits (e.g. '01-136232-073'), it extracts the numeric
-    sequence ('01136232073' -> 1136232073).
-    Otherwise, it hashes the string deterministically.
+    Transforms a student roll number into an integer random seed.
+    Uses the student roll number ID (73 from '01-136232-073') as seed.
     """
     if isinstance(roll_no, int):
         return abs(roll_no)
+    
+    parts = str(roll_no).strip().split("-")
+    if len(parts) > 1 and parts[-1].isdigit():
+        return int(parts[-1])
     
     digits = "".join(ch for ch in str(roll_no) if ch.isdigit())
     if digits:
         return int(digits)
     
-    # Deterministic fallback hashing for non-digit inputs
-    return int(hashlib.sha256(str(roll_no).encode("utf-8")).hexdigest()[:8], 16)
+    return 73
 
 
-# Default Problem Instance Parameters
-DEFAULT_SEED: int = roll_number_to_seed(STUDENT_ROLL_NO)
+# Default Problem Instance Parameters (Roll Number: 01-136232-073 -> Seed: 73)
+DEFAULT_SEED: int = 73
 DEFAULT_GRID_SIZE: int = 20
 DEFAULT_OBSTACLE_RATIO: float = 0.20  # 20% obstacle coverage (80 obstacles in 20x20)
 
