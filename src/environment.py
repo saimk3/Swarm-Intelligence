@@ -5,7 +5,7 @@ Generates a programmatic 2D grid instance with obstacle cells, start point,
 and goal point using the student's roll number as a deterministic random seed.
 """
 
-from typing import Tuple, Set, List
+from typing import Tuple, Set, List, Optional
 import random
 from collections import deque
 import numpy as np
@@ -20,11 +20,16 @@ class GridEnvironment:
         self,
         grid_size: int = 20,
         seed: int = 73,
-        obstacle_ratio: float = 0.20,
+        num_obstacles: Optional[int] = 55,
+        obstacle_ratio: Optional[float] = None,
     ):
         self.grid_size = grid_size
         self.seed = seed
-        self.obstacle_ratio = obstacle_ratio
+        if obstacle_ratio is not None:
+            self.num_obstacles = int(grid_size * grid_size * obstacle_ratio)
+        else:
+            self.num_obstacles = num_obstacles if num_obstacles is not None else 55
+        self.obstacle_ratio = self.num_obstacles / (grid_size * grid_size)
         self.obstacles: Set[Tuple[int, int]] = set()
         self.start: Tuple[float, float] = (0.0, 0.0)
         self.goal: Tuple[float, float] = (0.0, 0.0)
@@ -40,13 +45,10 @@ class GridEnvironment:
         random.seed(self.seed)
         np.random.seed(self.seed % (2**32 - 1))
 
-        total_cells = self.grid_size * self.grid_size
-        num_obstacles = int(total_cells * self.obstacle_ratio)
-
         all_cells = [(r, c) for r in range(self.grid_size) for c in range(self.grid_size)]
         
         # Programmatically generate obstacle cells from seed
-        sampled_obstacles = random.sample(all_cells, num_obstacles)
+        sampled_obstacles = random.sample(all_cells, self.num_obstacles)
         self.obstacles = set(sampled_obstacles)
 
         # Free non-obstacle cells

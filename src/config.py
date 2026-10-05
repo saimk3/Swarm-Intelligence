@@ -35,7 +35,7 @@ def roll_number_to_seed(roll_no: Union[str, int]) -> int:
 # Default Problem Instance Parameters (Roll Number: 01-136232-073 -> Seed: 73)
 DEFAULT_SEED: int = 73
 DEFAULT_GRID_SIZE: int = 20
-DEFAULT_OBSTACLE_RATIO: float = 0.20  # 20% obstacle coverage (80 obstacles in 20x20)
+DEFAULT_NUM_OBSTACLES: int = 55  # 55 obstacles as specified in student handwritten flowchart
 
 # PSO Hyperparameters
 DEFAULT_NUM_PARTICLES: int = 80

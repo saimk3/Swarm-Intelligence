@@ -14,7 +14,7 @@ from src.config import (
     STUDENT_ROLL_NO,
     DEFAULT_SEED,
     DEFAULT_GRID_SIZE,
-    DEFAULT_OBSTACLE_RATIO,
+    DEFAULT_NUM_OBSTACLES,
     DEFAULT_NUM_PARTICLES,
     DEFAULT_NUM_ITERATIONS,
     DEFAULT_NUM_WAYPOINTS,
@@ -54,10 +54,16 @@ def parse_arguments() -> argparse.Namespace:
         help=f"Dimension of square 2D grid (default: {DEFAULT_GRID_SIZE})",
     )
     parser.add_argument(
+        "--obstacles",
+        type=int,
+        default=DEFAULT_NUM_OBSTACLES,
+        help=f"Number of obstacle cells (default: {DEFAULT_NUM_OBSTACLES})",
+    )
+    parser.add_argument(
         "--obstacle-ratio",
         type=float,
-        default=DEFAULT_OBSTACLE_RATIO,
-        help=f"Ratio of obstacle cells to total grid cells (default: {DEFAULT_OBSTACLE_RATIO})",
+        default=None,
+        help="Optional ratio of obstacle cells to total grid cells",
     )
     parser.add_argument(
         "--particles",
@@ -112,7 +118,7 @@ def main():
     print(f" Roll Number    : {args.roll_no}")
     print(f" Problem Seed   : {seed}")
     print(f" Grid Dimension : {args.grid_size} x {args.grid_size}")
-    print(f" Obstacle Ratio : {args.obstacle_ratio:.1%}")
+    print(f" Obstacles Count: {args.obstacles} cells")
     print(f" Swarm Size     : {args.particles} particles")
     print(f" Iterations     : {args.iterations} cycles")
     print(f" Path Waypoints : {args.waypoints} intermediate points")
@@ -123,6 +129,7 @@ def main():
     env = GridEnvironment(
         grid_size=args.grid_size,
         seed=seed,
+        num_obstacles=args.obstacles,
         obstacle_ratio=args.obstacle_ratio,
     )
     summary = env.get_summary()

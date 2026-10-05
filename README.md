@@ -13,12 +13,12 @@
 | **Roll Number** | **01-136232-073** |
 | **Random Seed Used** | **`73`** (extracted directly from roll number ending ID) |
 | **Grid Dimensions** | 20 &times; 20 (400 total cells) |
-| **Obstacle Ratio** | 20.0% (80 blocked cells) |
-| **Start Point $(X, Y)$** | **$(5.0, 11.0)$** |
-| **Goal Point $(X, Y)$** | **$(18.0, 11.0)$** |
-| **Euclidean Straight-Line Distance** | **13.00 units** |
+| **Obstacles Placed** | **55 blocked cells** (as specified in student flowchart) |
+| **Start Point $(X, Y)$** | **$(10.0, 2.0)$** |
+| **Goal Point $(X, Y)$** | **$(4.0, 19.0)$** |
+| **Euclidean Straight-Line Distance** | **18.03 units** |
 
-> **Note on Problem Uniqueness:** In strict accordance with the assignment specifications, the grid environment, obstacle layout, and start/goal locations are generated purely programmatically using `random.seed(73)`. No coordinates or obstacles are hardcoded.
+> **Note on Problem Uniqueness:** In strict accordance with the assignment specifications, the grid environment, 55 obstacle layout, and start/goal locations are generated purely programmatically using `random.seed(73)`. No coordinates or obstacles are hardcoded.
 
 ---
 
@@ -80,30 +80,30 @@ flowchart TD
     J --> K([Output Shortest Obstacle-Free Path])
 ```
 
-### Visual Flow Diagram
-![Algorithm Flowchart](assets/flowchart.png)
-
-> **Hand-Drawn Flow Diagram Note:** A hand-drawn, paper-photographed version of this flow diagram can also be directly placed at `assets/flowchart.png`.
+### Hand-Drawn Flow Diagram (Photographed)
+<div align="center">
+  <img src="assets/flowchart.jpg" alt="Hand-Drawn Flow Diagram" width="500" />
+</div>
 
 ---
 
 ## 3. Experimental Results
 
-Execution of `python main.py` with seed **`73`** produced the following results:
+Execution of `python main.py` with seed **`73`** and **55 obstacles** produced the following results:
 
 | Metric | Initial Swarm Best | Final PSO Best | Post-Processed Path |
 | :--- | :--- | :--- | :--- |
-| **Status** | Infeasible (1 Collision) | **FEASIBLE (0 Collisions)** | **FEASIBLE (0 Collisions)** |
-| **Fitness Cost** | 1028.11 | **15.11** | **14.72** |
-| **Path Length** | 25.07 units | **14.72 units** | **14.72 units** |
-| **Obstacle Collisions** | 1 cell | **0 cells** | **0 cells** |
-| **Direct Distance** | 13.00 units | 13.00 units | 13.00 units |
+| **Status** | **FEASIBLE (0 Collisions)** | **FEASIBLE (0 Collisions)** | **FEASIBLE (0 Collisions)** |
+| **Fitness Cost** | 22.24 | **18.35** | **18.33** |
+| **Path Length** | 20.36 units | **18.33 units** | **18.33 units** |
+| **Obstacle Collisions** | 0 cells | **0 cells** | **0 cells** |
+| **Direct Distance** | 18.03 units | 18.03 units | 18.03 units |
 
 ### Optimization & Convergence Plot
 ![Path Planning Result](assets/path_planning_result.png)
 
-- **Left Panel:** 2D grid $(20 \times 20)$ displaying the 80 blocked obstacle cells, the Start position $(5.0, 11.0)$, the Goal position $(18.0, 11.0)$, and the generated collision-free path safely bending around the obstacles.
-- **Right Panel:** Convergence curves illustrating how fitness cost dropped drastically once all collisions were resolved, followed by steady minimization of Euclidean path length over 150 iterations.
+- **Left Panel:** 2D grid $(20 \times 20)$ displaying the 55 blocked obstacle cells, the Start position $(10.0, 2.0)$, the Goal position $(4.0, 19.0)$, and the generated collision-free path safely dodging obstacles across an 18.03-unit span.
+- **Right Panel:** Convergence curves showing steady minimization of Euclidean path length over 150 iterations.
 
 ---
 
